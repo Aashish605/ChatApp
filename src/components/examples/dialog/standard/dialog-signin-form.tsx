@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
+import Signup from "./dialog-signup-form"
 const Signin = () => (
   <Dialog>
     <DialogTrigger asChild>
@@ -49,7 +49,7 @@ const Signin = () => (
       <p className="text-center text-muted-foreground text-sm">
         Don't have an account?{" "}
         <button className="font-medium underline" type="button">
-          Sign up
+          <Signup/>
         </button>
       </p>
     </DialogContent>
