@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Signup from "./dialog-signup-form"
+import { Link } from "react-router-dom"
+
 const Signin = () => (
   <Dialog>
     <DialogTrigger asChild>
@@ -49,7 +50,7 @@ const Signin = () => (
       <p className="text-center text-muted-foreground text-sm">
         Don't have an account?{" "}
         <button className="font-medium underline" type="button">
-          <Signup/>
+          <Link to="signup">SignUp</Link>
         </button>
       </p>
     </DialogContent>
