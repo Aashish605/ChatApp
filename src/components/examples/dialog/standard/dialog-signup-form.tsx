@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import Signin from "./dialog-signin-form"
 
 const Signup = () => (
   <Dialog>
@@ -69,7 +70,7 @@ const Signup = () => (
         <p className="text-muted-foreground text-sm">
           Already have an account?{" "}
           <button className="font-medium underline" type="button">
-            Sign in
+            <Signin/>
           </button>
         </p>
       </DialogFooter>
