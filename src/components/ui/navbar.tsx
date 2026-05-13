@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Link } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -71,22 +72,17 @@ export interface NavbarNavLink {
 
 export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   logo?: React.ReactNode
-  logoHref?: string
   navigationLinks?: NavbarNavLink[]
   signInText?: string
-  signInHref?: string
-  ctaText?: string
-  ctaHref?: string
   onSignInClick?: () => void
-  onCtaClick?: () => void
 }
 
 // Default navigation links
 const defaultNavigationLinks: NavbarNavLink[] = [
-  { href: "#", label: "Home", active: true },
-  { href: "#features", label: "Features" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#about", label: "About" },
+  // { href: "#", label: "Home", active: true },
+  // { href: "#features", label: "Features" },
+  // { href: "#pricing", label: "Pricing" },
+  // { href: "#about", label: "About" },
 ]
 
 export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
@@ -94,14 +90,9 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
     {
       className,
       logo = <Logo />,
-      logoHref = "#",
       navigationLinks = defaultNavigationLinks,
       signInText = "Sign In",
-      signInHref = "#signin",
-      ctaText = "Get Started",
-      ctaHref = "#get-started",
       onSignInClick,
-      onCtaClick,
       ...props
     },
     ref,
@@ -197,8 +188,8 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                 className="flex items-center space-x-2 text-primary hover:text-primary/90 transition-colors cursor-pointer"
                 onClick={e => e.preventDefault()}
               >
-                <div className="text-2xl">{logo}</div>
-                <span className="hidden font-bold text-xl sm:inline-block">shadcn.io</span>
+                <Link to="/" className="text-2xl">{logo}</Link>
+                <span className="hidden font-bold text-xl sm:inline-block">Chat App</span>
               </button>
               {/* Navigation menu */}
               {!isMobile && (
@@ -238,19 +229,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
               size="sm"
               variant="ghost"
             >
-              {signInText}
-            </Button>
-            <Button
-              className="text-sm font-medium px-4 h-9 rounded-md shadow-sm"
-              onClick={e => {
-                e.preventDefault()
-                if (onCtaClick) {
-                  onCtaClick()
-                }
-              }}
-              size="sm"
-            >
-              {ctaText}
+              <Link to="/signin">{signInText}</Link>
             </Button>
           </div>
         </div>
