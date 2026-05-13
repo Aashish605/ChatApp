@@ -4,14 +4,12 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import App from "../App.tsx";
-import Signup from "@/components/examples/dialog/standard/dialog-signup-form.tsx";
-import Signin from "@/components/examples/dialog/standard/dialog-signin-form.tsx";
+import Signin from "@/components/examples/card/standard/login-card.tsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="/signup" element={<Signup />} />
+    <Route path="" element={<App />}>
       <Route path="/signin" element={<Signin />} />
-      <Route path="*" element={<div>Not Found</div>} />
     </Route>,
   ),
 );
