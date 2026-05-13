@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import Signin from "./dialog-signin-form"
+import { Link } from "react-router-dom"
 
 const Signup = () => (
   <Dialog>
@@ -70,7 +70,7 @@ const Signup = () => (
         <p className="text-muted-foreground text-sm">
           Already have an account?{" "}
           <button className="font-medium underline" type="button">
-            <Signin/>
+            <Link to="/signin">SignIn</Link>
           </button>
         </p>
       </DialogFooter>
