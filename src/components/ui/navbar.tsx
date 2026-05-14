@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import { useUserState } from "@/hooks/useUserState"
+
+
 
 // Simple logo component for the navbar
 const Logo = (props: React.SVGAttributes<SVGElement>) => {
@@ -99,6 +102,8 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
   ) => {
     const [isMobile, setIsMobile] = useState(false)
     const containerRef = useRef<HTMLElement>(null)
+    const user = useUserState((state) => state.user)
+
 
     useEffect(() => {
       const checkWidth = () => {
@@ -132,6 +137,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
       },
       [ref],
     )
+
 
     return (
       <header
@@ -218,19 +224,23 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
           </div>
           {/* Right side */}
           <div className="flex items-center gap-3">
-            <Button
-              className="text-sm font-medium hover:bg-accent hover:text-accent-foreground"
-              onClick={e => {
-                e.preventDefault()
-                if (onSignInClick) {
-                  onSignInClick()
-                }
-              }}
-              size="sm"
-              variant="ghost"
-            >
-              <Link to="/signin">{signInText}</Link>
-            </Button>
+            {user ? (
+              <div>{user?.name}</div>
+            ) : (
+              <Button
+                className="text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+                onClick={e => {
+                  e.preventDefault()
+                  if (onSignInClick) {
+                    onSignInClick()
+                  }
+                }}
+                size="sm"
+                variant="ghost"
+              >
+                <Link to="/signin">{signInText}</Link>
+              </Button>
+            )}
           </div>
         </div>
       </header>

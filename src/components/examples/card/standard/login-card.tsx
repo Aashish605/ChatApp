@@ -12,13 +12,49 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Link } from "react-router-dom"
+import { supabase } from "@/config/supabase"
+import { toast } from "react-toastify"
+import { useUserState } from "@/hooks/useUserState"
+
+
 
 const Signin = () => {
+  const userState = useUserState()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+
+    const { data, error: signupError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (signupError) {
+      console.log(signupError)
+      toast.error(signupError.message);
+    } else {
+      console.log(data.user.user_metadata)
+      toast.success("User Logged In Successfully!");
+      const user = data.user.user_metadata
+      userState.setUser({
+        name:user.name,
+        email:user.email
+      })
+      setEmail("")
+      setPassword("")
+    }
+
+    
+
+
+  }
+
+
   return (
-    <div className="min-h-screen  flex items-center justify-center">
+    <div className="min-h-[80vh]  flex items-center justify-center">
       <Card className="w-full max-w-md  mx-auto ">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
@@ -49,7 +85,7 @@ const Signin = () => {
               value={password}
             />
           </div>
-          <Button className="w-full">Login</Button>
+          <Button onClick={handleSubmit} className="w-full">Login</Button>
           <Button className="w-full" variant="outline">
             Login with Google
           </Button>
@@ -57,9 +93,9 @@ const Signin = () => {
         <CardFooter className="flex justify-center">
           <p className="text-muted-foreground text-sm">
             Don't have an account?{" "}
-            <a className="underline" href="#">
+            <Link to={'/signup'} className="underline" >
               Sign up
-            </a>
+            </Link>
           </p>
         </CardFooter>
       </Card>
